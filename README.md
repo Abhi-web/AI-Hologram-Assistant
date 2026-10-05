@@ -439,6 +439,12 @@ Contributions, issues, and feature requests are welcome!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+   ### 🌐 Live Demo
+
+🚀 **[View Live Demo](https://6ac3c0f2a432690a461f6679--ai-hologram-assistant.netlify.app/)**
+
+> Explore the AI Hologram Assistant with its interactive 3D avatar, voice interaction, real-time lip-sync, AI chat, and holographic desktop experience.
+
 ---
 
 ## 📄 License
