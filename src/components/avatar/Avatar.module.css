@@ -1,0 +1,376 @@
+/* ─── Avatar.module.css ──────────────────────────────────────────────────────── */
+
+.avatarContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ── Three.js Canvas Container ── */
+.canvasWrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* ── Subtle Hologram Grid & Scanline Effect ── */
+.hologramOverlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    rgba(0, 212, 255, 0.015) 50%,
+    rgba(0, 0, 0, 0.05) 50%
+  );
+  background-size: 100% 4px;
+}
+
+.hologramScanline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.35), transparent);
+  animation: scanline 4s linear infinite;
+  pointer-events: none;
+  z-index: 3;
+}
+
+@keyframes scanline {
+  0% {
+    top: 0%;
+    opacity: 0;
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  100% {
+    top: 100%;
+    opacity: 0;
+  }
+}
+
+/* ── HUD Status Badge ── */
+.hudBadge {
+  position: absolute;
+  bottom: 12px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  background: rgba(10, 15, 29, 0.75);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 9999px;
+  backdrop-filter: blur(6px);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.statusDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00d4ff;
+  box-shadow: 0 0 8px #00d4ff;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.6; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.1); }
+}
+
+.hudTitle {
+  font-family: var(--font-display, sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #00d4ff;
+  text-transform: uppercase;
+}
+
+.hudState {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-text-muted, #7e8b9b);
+  text-transform: capitalize;
+}
+
+/* ── HUD State Variants ── */
+.hudBadgeSpeaking {
+  background: rgba(10, 24, 40, 0.85);
+  border-color: rgba(0, 212, 255, 0.6);
+  box-shadow: 0 0 14px rgba(0, 212, 255, 0.25);
+}
+
+.hudSpeakingText {
+  font-size: 10px;
+  font-weight: 700;
+  color: #00f0ff;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  animation: pulse-glow 1.5s ease-in-out infinite;
+}
+
+.hudCompanionTag {
+  font-size: 9px;
+  font-weight: 600;
+  color: #a5f3fc;
+  background: rgba(0, 212, 255, 0.15);
+  padding: 1px 6px;
+  border-radius: 9999px;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  margin-left: 4px;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.hudBadgeListening {
+  background: rgba(18, 12, 38, 0.85);
+  border-color: rgba(123, 47, 255, 0.6);
+  box-shadow: 0 0 14px rgba(123, 47, 255, 0.25);
+}
+
+.hudBadgeThinking {
+  background: rgba(24, 18, 10, 0.85);
+  border-color: rgba(255, 170, 0, 0.5);
+  box-shadow: 0 0 14px rgba(255, 170, 0, 0.2);
+}
+
+.dotListening {
+  background: #7b2fff;
+  box-shadow: 0 0 8px #7b2fff;
+}
+
+.dotThinking {
+  background: #ffaa00;
+  box-shadow: 0 0 8px #ffaa00;
+}
+
+/* ── Animated Audio Wave Bars for Speaking ── */
+.audioWaveIcon {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 12px;
+}
+
+.waveBar {
+  display: inline-block;
+  width: 2px;
+  background: #00d4ff;
+  border-radius: 1px;
+  animation: wave 0.8s ease-in-out infinite;
+}
+
+.waveBar:nth-child(1) {
+  height: 6px;
+  animation-delay: 0.1s;
+}
+
+.waveBar:nth-child(2) {
+  height: 12px;
+  animation-delay: 0.25s;
+}
+
+.waveBar:nth-child(3) {
+  height: 8px;
+  animation-delay: 0.4s;
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: scaleY(0.4);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scaleY(1.2);
+    opacity: 1;
+  }
+}
+
+.devCapabilityBadge {
+  padding: 3px 8px;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 4px;
+  font-size: 9px;
+  font-weight: 600;
+  color: #00d4ff;
+  letter-spacing: 0.04em;
+}
+
+/* ── Dev Tools Floating Bar ── */
+.devBar {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  z-index: 10;
+}
+
+.devButton {
+  padding: 4px 8px;
+  background: rgba(14, 20, 36, 0.8);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 4px;
+  color: var(--color-text-secondary, #a0aec0);
+  font-family: var(--font-sans, sans-serif);
+  font-size: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(6px);
+}
+
+.devButton:hover {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: rgba(0, 212, 255, 0.5);
+  color: #ffffff;
+}
+
+.devButtonActive {
+  background: rgba(0, 212, 255, 0.25);
+  border-color: #00d4ff;
+  color: #00d4ff;
+}
+
+/* ── Loading Spinner ── */
+.loadingContainer {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  background: rgba(5, 7, 15, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 5;
+}
+
+.loadingSpinner {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.spinnerRingOuter {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: #00d4ff;
+  border-right-color: #00d4ff;
+  animation: spin 1.2s linear infinite;
+}
+
+.spinnerRingInner {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-bottom-color: #7b2fff;
+  border-left-color: #7b2fff;
+  animation: spin-reverse 0.9s linear infinite;
+}
+
+.spinnerCore {
+  position: absolute;
+  inset: 16px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #00d4ff 0%, #7b2fff 100%);
+  opacity: 0.8;
+  animation: pulse-core 1.5s ease-in-out infinite;
+}
+
+.loadingText {
+  font-family: var(--font-display, sans-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #00d4ff;
+  text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes spin-reverse {
+  to { transform: rotate(-360deg); }
+}
+
+@keyframes pulse-core {
+  0%, 100% { transform: scale(0.85); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+/* ── Error State ── */
+.errorContainer {
+  position: absolute;
+  inset: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  background: rgba(26, 10, 15, 0.7);
+  border: 1px solid rgba(255, 71, 87, 0.3);
+  border-radius: 8px;
+  z-index: 5;
+}
+
+.errorIcon {
+  margin-bottom: 8px;
+}
+
+.errorTitle {
+  font-family: var(--font-display, sans-serif);
+  font-size: 13px;
+  font-weight: 700;
+  color: #ff4757;
+  margin: 0 0 4px;
+}
+
+.errorMessage {
+  font-size: 11px;
+  color: #a0aec0;
+  max-width: 320px;
+  margin: 0 0 12px;
+}
+
+.retryButton {
+  padding: 6px 14px;
+  background: rgba(255, 71, 87, 0.15);
+  border: 1px solid rgba(255, 71, 87, 0.4);
+  border-radius: 4px;
+  color: #ff4757;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.retryButton:hover {
+  background: rgba(255, 71, 87, 0.25);
+  border-color: #ff4757;
+  color: #ffffff;
+}

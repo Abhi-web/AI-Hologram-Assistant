@@ -1,0 +1,328 @@
+/* ─── HologramWorkspace.module.css ─────────────────────────────────────────── */
+
+.hologramContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: transparent !important;
+  overflow: hidden;
+  user-select: none;
+}
+
+/* ── Top Draggable Handle Header ── */
+.dragHeader {
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  background: rgba(10, 15, 30, 0.45);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 12px 12px 0 0;
+  -webkit-app-region: drag; /* Allows moving window */
+  z-index: 50;
+  cursor: grab;
+}
+
+.dragHeader:active {
+  cursor: grabbing;
+}
+
+.headerBrand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.brandDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00d4ff;
+  box-shadow: 0 0 10px #00d4ff;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 0.7; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.brandTitle {
+  font-family: var(--font-display, sans-serif);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: #00d4ff;
+  text-transform: uppercase;
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  -webkit-app-region: no-drag; /* Buttons must be clickable */
+}
+
+.headerBtn {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  color: #a0aec0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.headerBtn:hover {
+  background: rgba(0, 212, 255, 0.2);
+  border-color: #00d4ff;
+  color: #ffffff;
+}
+
+.headerBtnClose:hover {
+  background: rgba(255, 71, 87, 0.3);
+  border-color: #ff4757;
+  color: #ff4757;
+}
+
+.headerBtnActive {
+  background: rgba(0, 212, 255, 0.25);
+  border-color: #00d4ff;
+  color: #00d4ff;
+}
+
+/* ── 3D Avatar Viewport ── */
+.avatarViewport {
+  flex: 1;
+  position: relative;
+  width: 100%;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent !important;
+  -webkit-app-region: no-drag;
+}
+
+/* ── Minimal Floating Action Toolbar ── */
+.actionToolbar {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(8, 12, 26, 0.7);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 9999px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 16px rgba(0, 212, 255, 0.15);
+  z-index: 40;
+  -webkit-app-region: no-drag;
+}
+
+.toolBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  color: #cbd5e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toolBtn:hover {
+  background: rgba(0, 212, 255, 0.2);
+  border-color: #00d4ff;
+  color: #ffffff;
+  transform: scale(1.05);
+}
+
+.toolBtnActive {
+  background: rgba(0, 212, 255, 0.3);
+  border-color: #00d4ff;
+  color: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.4);
+}
+
+.toolBtnSpeaking {
+  background: rgba(123, 47, 255, 0.35);
+  border-color: #7b2fff;
+  color: #ffffff;
+  animation: pulse-speaking 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse-speaking {
+  0%, 100% { box-shadow: 0 0 8px rgba(123, 47, 255, 0.4); }
+  50% { box-shadow: 0 0 18px rgba(123, 47, 255, 0.8); }
+}
+
+.toolBtnListening {
+  background: rgba(255, 71, 87, 0.35);
+  border-color: #ff4757;
+  color: #ffffff;
+  animation: pulse-listening 1s ease-in-out infinite;
+}
+
+@keyframes pulse-listening {
+  0%, 100% { box-shadow: 0 0 8px rgba(255, 71, 87, 0.4); }
+  50% { box-shadow: 0 0 20px rgba(255, 71, 87, 0.8); }
+}
+
+/* ── Collapsible Mini Chat ── */
+.miniChatContainer {
+  position: absolute;
+  bottom: 58px;
+  left: 12px;
+  right: 12px;
+  background: rgba(8, 14, 28, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 212, 255, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  max-height: 220px;
+  z-index: 45;
+  -webkit-app-region: no-drag;
+  animation: slide-up 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.miniChatHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+  background: rgba(0, 212, 255, 0.05);
+}
+
+.miniChatTitle {
+  font-family: var(--font-display, sans-serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #00d4ff;
+  text-transform: uppercase;
+}
+
+.miniChatClose {
+  background: transparent;
+  border: none;
+  color: #718096;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+}
+
+.miniChatClose:hover {
+  color: #ff4757;
+}
+
+.miniChatBody {
+  padding: 8px 12px;
+  overflow-y: auto;
+  max-height: 120px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #e2e8f0;
+}
+
+.miniMessageBubble {
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  border-radius: 8px;
+  padding: 6px 10px;
+  word-break: break-word;
+}
+
+.miniInputRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-top: 1px solid rgba(0, 212, 255, 0.15);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.miniInput {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 6px;
+  padding: 5px 10px;
+  color: #ffffff;
+  font-size: 11px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.miniInput:focus {
+  border-color: #00d4ff;
+  box-shadow: 0 0 8px rgba(0, 212, 255, 0.3);
+}
+
+.miniSendBtn {
+  padding: 5px 10px;
+  background: linear-gradient(135deg, #00d4ff 0%, #7b2fff 100%);
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.miniSendBtn:hover:not(:disabled) {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.miniSendBtn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.streamingCursor {
+  display: inline-block;
+  width: 4px;
+  height: 11px;
+  background: #00d4ff;
+  margin-left: 3px;
+  animation: blink 0.8s infinite;
+  vertical-align: middle;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}

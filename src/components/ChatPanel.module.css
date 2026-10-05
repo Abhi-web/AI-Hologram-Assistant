@@ -1,0 +1,931 @@
+/* ─── ChatPanel.module.css ──────────────────────────────────────────────────── */
+
+.chatPanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* ─── Chat Header ───────────────────────────────────────────────────────────── */
+
+.chatHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  background: rgba(11, 11, 26, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(8px);
+}
+
+.headerTitle {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.headerControls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ttsHeaderBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.ttsHeaderBadge:hover {
+  background: rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.35);
+  color: var(--color-accent-primary);
+}
+
+.ttsHeaderBadgeActive {
+  background: rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.3);
+  color: #38bdf8;
+}
+
+.ttsHeaderBadgeMuted {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-muted);
+}
+
+.ttsHeaderBadgeSpeaking {
+  background: rgba(123, 47, 255, 0.15);
+  border-color: rgba(123, 47, 255, 0.5);
+  color: #c4b5fd;
+  animation: pulseGlow 1.5s infinite alternate;
+}
+
+.ttsHeaderDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #38bdf8;
+  box-shadow: 0 0 6px #38bdf8;
+}
+
+.ttsHeaderBadgeMuted .ttsHeaderDot {
+  background: var(--color-text-muted);
+  box-shadow: none;
+}
+
+.ttsHeaderBadgeSpeaking .ttsHeaderDot {
+  background: #a78bfa;
+  box-shadow: 0 0 8px #a78bfa;
+  animation: dotBlink 0.6s infinite alternate;
+}
+
+.ttsHeaderLabel {
+  font-weight: 600;
+}
+
+.providerBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  transition: all 0.25s ease;
+}
+
+.providerBadgeLocal {
+  background: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: #34d399;
+}
+
+.providerBadgeLocal .providerDot {
+  background: #10b981;
+  box-shadow: 0 0 6px #10b981;
+}
+
+.providerBadgeCloud {
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  color: #38bdf8;
+}
+
+.providerBadgeCloud .providerDot {
+  background: #00d4ff;
+  box-shadow: 0 0 6px #00d4ff;
+}
+
+.providerDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.providerLabel {
+  font-weight: 600;
+}
+
+.providerModel {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 10px;
+  opacity: 0.8;
+  padding-left: 6px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* ─── Hands-free Voice Mode Header Badge ─── */
+.voiceConvHeaderBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  background: transparent;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.voiceConvBadgeContinuous {
+  background: rgba(0, 212, 255, 0.12);
+  border-color: rgba(0, 212, 255, 0.4);
+  color: #38bdf8;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+.voiceConvBadgeWakeWord {
+  background: rgba(168, 85, 247, 0.12);
+  border-color: rgba(168, 85, 247, 0.4);
+  color: #c084fc;
+}
+
+.voiceConvBadgeOff {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-muted);
+}
+
+.voiceConvDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+}
+
+.voiceConvDotContinuous {
+  background: #00d4ff;
+  box-shadow: 0 0 8px #00d4ff;
+  animation: dotBlink 1s infinite alternate;
+}
+
+.voiceConvDotWakeWord {
+  background: #a855f7;
+  box-shadow: 0 0 8px #a855f7;
+}
+
+.voiceConvLabel {
+  font-weight: 600;
+}
+
+/* ─── Hands-free Voice Banner ─── */
+.voiceConvBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 14px;
+  margin: 0 16px 8px 16px;
+  border-radius: 10px;
+  background: rgba(0, 20, 40, 0.7);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.25s ease;
+  font-size: 11px;
+}
+
+.voiceConvBannerListening {
+  border-color: rgba(0, 212, 255, 0.4);
+  background: rgba(0, 30, 60, 0.75);
+}
+
+.voiceConvBannerSpeaking {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: rgba(5, 35, 25, 0.75);
+}
+
+.voiceConvBannerProcessing {
+  border-color: rgba(168, 85, 247, 0.4);
+  background: rgba(30, 10, 50, 0.75);
+}
+
+.voiceConvBannerInterrupted {
+  border-color: rgba(245, 158, 11, 0.4);
+  background: rgba(45, 25, 5, 0.75);
+}
+
+.voiceConvIndicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+}
+
+.voiceConvPulseDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #00d4ff;
+  box-shadow: 0 0 8px #00d4ff;
+  animation: dotBlink 0.8s infinite alternate;
+  flex-shrink: 0;
+}
+
+.voiceConvStatusText {
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.liveVoiceHypothesis {
+  color: #38bdf8;
+  font-style: italic;
+}
+
+.voiceConvControls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: 10px;
+  flex-shrink: 0;
+}
+
+.voiceInterruptBtn {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.5);
+  color: #f87171;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.voiceInterruptBtn:hover {
+  background: rgba(239, 68, 68, 0.35);
+}
+
+.voiceModeToggleBtn {
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 10px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.voiceModeToggleBtn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ─── Message List ───────────────────────────────────────────────────────────── */
+
+.messageList {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar */
+.messageList::-webkit-scrollbar {
+  width: 4px;
+}
+.messageList::-webkit-scrollbar-track {
+  background: transparent;
+}
+.messageList::-webkit-scrollbar-thumb {
+  background: rgba(0, 212, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* ─── Message Row ────────────────────────────────────────────────────────────── */
+
+.messageRow {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  animation: fadeIn 0.25s ease;
+}
+
+.messageRowUser {
+  flex-direction: row-reverse;
+}
+
+/* ─── Avatar Icon ────────────────────────────────────────────────────────────── */
+
+.avatarIcon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.2), rgba(123, 47, 255, 0.2));
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 7px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: var(--color-accent-primary);
+  text-transform: uppercase;
+}
+
+.avatarIconUser {
+  background: linear-gradient(135deg, rgba(123, 47, 255, 0.2), rgba(255, 45, 135, 0.2));
+  border-color: rgba(123, 47, 255, 0.3);
+  color: #7b2fff;
+  font-size: 6px;
+}
+
+/* ─── Message Content ────────────────────────────────────────────────────────── */
+
+.messageContent {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  max-width: 70%;
+}
+
+.messageRowUser .messageContent {
+  align-items: flex-end;
+}
+
+/* ─── Bubble ─────────────────────────────────────────────────────────────────── */
+
+.bubble {
+  padding: 11px 16px;
+  border-radius: 16px;
+  font-size: 14px;
+  line-height: 1.55;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* AI bubble */
+.bubbleAssistant {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  border-bottom-left-radius: 4px;
+  color: var(--color-text-primary);
+}
+
+/* User bubble */
+.bubbleUser {
+  background: linear-gradient(135deg, #0095b3 0%, #5c22cc 100%);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-bottom-right-radius: 4px;
+  color: #fff;
+  box-shadow: 0 4px 16px rgba(0, 212, 255, 0.15);
+}
+
+/* ─── Typing Indicator ───────────────────────────────────────────────────────── */
+
+.typingBubble {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 14px 18px;
+  min-width: 60px;
+}
+
+.typingDot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-accent-primary);
+  opacity: 0.6;
+  animation: typing-bounce 1.2s ease-in-out infinite;
+}
+
+.typingDot:nth-child(2) { animation-delay: 0.2s; }
+.typingDot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes typing-bounce {
+  0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+  40%            { transform: translateY(-6px); opacity: 1; }
+}
+
+.typingBubbleInline {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 2px;
+}
+
+/* ─── Timestamp ──────────────────────────────────────────────────────────────── */
+
+.timestamp {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  padding: 0 4px;
+}
+
+.timestampUser {
+  text-align: right;
+}
+
+/* ─── Input Bar ──────────────────────────────────────────────────────────────── */
+
+.inputBar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px 18px;
+  border-top: 1px solid var(--color-border);
+  background: rgba(5, 5, 18, 0.7);
+  backdrop-filter: blur(8px);
+  flex-shrink: 0;
+}
+
+/* Mic button */
+.micButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.micButtonReady:hover {
+  background: rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.4);
+  color: var(--color-accent-primary);
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.25);
+  transform: scale(1.04);
+}
+
+.micButtonListening {
+  background: rgba(255, 45, 135, 0.15);
+  border-color: rgba(255, 45, 135, 0.8);
+  color: #ff2d87;
+  box-shadow: 0 0 16px rgba(255, 45, 135, 0.4), inset 0 0 8px rgba(255, 45, 135, 0.2);
+  animation: micPulse 1.2s infinite ease-in-out;
+}
+
+.micButtonProcessing {
+  background: rgba(123, 47, 255, 0.15);
+  border-color: rgba(123, 47, 255, 0.7);
+  color: #b388ff;
+  box-shadow: 0 0 14px rgba(123, 47, 255, 0.35);
+}
+
+.micButtonRequesting {
+  background: rgba(255, 184, 0, 0.15);
+  border-color: rgba(255, 184, 0, 0.6);
+  color: #ffb800;
+  animation: micPulse 1.5s infinite ease-in-out;
+}
+
+@keyframes micPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 12px rgba(255, 45, 135, 0.3);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 22px rgba(255, 45, 135, 0.7);
+  }
+}
+
+/* Status dot on the mic button */
+.micStatusDot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.micStatusDotIdle {
+  background: #00ffaa;
+  box-shadow: 0 0 5px #00ffaa;
+}
+
+.micStatusDotListening {
+  background: #ff2d87;
+  box-shadow: 0 0 8px #ff2d87;
+  animation: dotBlink 0.6s infinite alternate;
+}
+
+.micStatusDotProcessing {
+  background: #b388ff;
+  box-shadow: 0 0 6px #b388ff;
+}
+
+.micStatusDotRequesting {
+  background: #ffb800;
+  box-shadow: 0 0 6px #ffb800;
+  animation: dotBlink 0.8s infinite alternate;
+}
+
+/* Voice Output (TTS) Toggle Button */
+.ttsToggleButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ttsToggleActive {
+  background: rgba(0, 212, 255, 0.08);
+  border-color: rgba(0, 212, 255, 0.35);
+  color: var(--color-accent-primary);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
+}
+
+.ttsToggleActive:hover {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: rgba(0, 212, 255, 0.6);
+  transform: scale(1.04);
+}
+
+.ttsToggleInactive {
+  opacity: 0.45;
+  color: var(--color-text-muted);
+}
+
+.ttsToggleInactive:hover {
+  opacity: 0.8;
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--color-text-primary);
+}
+
+.ttsToggleSpeaking {
+  background: rgba(123, 47, 255, 0.18);
+  border-color: rgba(123, 47, 255, 0.8);
+  color: #c4b5fd;
+  box-shadow: 0 0 16px rgba(123, 47, 255, 0.45);
+  animation: micPulse 1.2s infinite ease-in-out;
+}
+
+/* TTS Speaking Banner */
+.ttsSpeakingBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 20px 8px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, rgba(123, 47, 255, 0.15), rgba(0, 212, 255, 0.1));
+  border: 1px solid rgba(123, 47, 255, 0.45);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.ttsIndicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.ttsWaveContainer {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.ttsWave {
+  display: inline-block;
+  width: 3px;
+  background: #a78bfa;
+  border-radius: 2px;
+  animation: wavePulse 0.75s infinite ease-in-out alternate;
+}
+
+.ttsWave:nth-child(1) { height: 9px; animation-delay: 0.1s; }
+.ttsWave:nth-child(2) { height: 18px; animation-delay: 0.25s; }
+.ttsWave:nth-child(3) { height: 13px; animation-delay: 0.15s; }
+.ttsWave:nth-child(4) { height: 16px; animation-delay: 0.35s; }
+
+.ttsStatusText {
+  font-size: 13px;
+  color: #e0e7ff;
+  white-space: nowrap;
+}
+
+.ttsStopButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(255, 71, 87, 0.2);
+  border: 1px solid rgba(255, 71, 87, 0.5);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ff6b81;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.ttsStopButton:hover {
+  background: rgba(255, 71, 87, 0.35);
+  box-shadow: 0 0 10px rgba(255, 71, 87, 0.4);
+  transform: scale(1.02);
+}
+
+/* Voice Listening Banner */
+.voiceBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 20px 8px;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, rgba(255, 45, 135, 0.12), rgba(0, 212, 255, 0.08));
+  border: 1px solid rgba(255, 45, 135, 0.4);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.voiceIndicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.voiceWaveContainer {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.voiceWave {
+  display: inline-block;
+  width: 3px;
+  background: #ff2d87;
+  border-radius: 2px;
+  animation: wavePulse 0.8s infinite ease-in-out alternate;
+}
+
+.voiceWave:nth-child(1) { height: 8px; animation-delay: 0.1s; }
+.voiceWave:nth-child(2) { height: 16px; animation-delay: 0.3s; }
+.voiceWave:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+.voiceWave:nth-child(4) { height: 18px; animation-delay: 0.4s; }
+
+@keyframes wavePulse {
+  0% { transform: scaleY(0.4); opacity: 0.5; }
+  100% { transform: scaleY(1.2); opacity: 1; }
+}
+
+.voiceStatusText {
+  font-size: 13px;
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.voiceHearingLabel {
+  color: var(--color-accent-primary);
+  margin-right: 4px;
+}
+
+.voiceActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.voiceStopButton {
+  padding: 5px 12px;
+  background: rgba(0, 212, 255, 0.2);
+  border: 1px solid rgba(0, 212, 255, 0.5);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-accent-primary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.voiceStopButton:hover {
+  background: rgba(0, 212, 255, 0.35);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+}
+
+.voiceCancelButton {
+  padding: 5px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  font-size: 12px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.voiceCancelButton:hover {
+  background: rgba(255, 45, 135, 0.15);
+  border-color: rgba(255, 45, 135, 0.4);
+  color: #ff2d87;
+}
+
+/* Voice Error Banner */
+.voiceErrorBanner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 20px 8px;
+  padding: 8px 14px;
+  background: rgba(255, 71, 87, 0.12);
+  border: 1px solid rgba(255, 71, 87, 0.4);
+  border-radius: 10px;
+  color: #ff6b81;
+  font-size: 13px;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.voiceErrorIcon {
+  font-size: 14px;
+}
+
+.voiceErrorMessage {
+  flex: 1;
+}
+
+/* Text input */
+.textInput {
+  flex: 1;
+  height: 44px;
+  padding: 0 16px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: var(--color-text-primary);
+  outline: none;
+  transition: border-color var(--transition-fast), background var(--transition-fast),
+    box-shadow var(--transition-fast);
+  min-width: 0;
+}
+
+.textInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+.textInput:focus {
+  border-color: rgba(0, 212, 255, 0.45);
+  background: rgba(0, 212, 255, 0.04);
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.08);
+}
+
+.textInput:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Send button */
+.sendButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background: var(--gradient-button);
+  border: none;
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 12px rgba(0, 212, 255, 0.25);
+}
+
+.sendButton:hover:not(:disabled) {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 212, 255, 0.4);
+}
+
+.sendButton:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.sendButton:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  box-shadow: none;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* Stop button (shown while streaming) */
+.stopButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, rgba(255, 75, 110, 0.9), rgba(200, 30, 80, 0.9));
+  border: 1px solid rgba(255, 100, 130, 0.4);
+  border-radius: 12px;
+  color: #fff;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 14px rgba(255, 75, 110, 0.35);
+}
+
+.stopButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 75, 110, 0.5);
+  background: linear-gradient(135deg, rgba(255, 90, 125, 1), rgba(220, 40, 95, 1));
+}
+
+.stopButton:active {
+  transform: scale(0.97);
+}
+
+/* Streaming blinking cursor */
+.streamingCursor {
+  display: inline-block;
+  width: 7px;
+  height: 15px;
+  margin-left: 3px;
+  background: var(--color-accent-primary);
+  border-radius: 2px;
+  vertical-align: -2px;
+  box-shadow: 0 0 8px var(--color-accent-primary);
+  animation: streaming-blink 0.8s infinite ease-in-out;
+}
+
+@keyframes streaming-blink {
+  0%, 100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  50% {
+    opacity: 0.15;
+    transform: scaleY(0.8);
+  }
+}

@@ -1,0 +1,337 @@
+/* ─── WelcomeScreen.module.css ──────────────────────────────────────────────── */
+
+/* Container */
+.container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* ─── Background: Particle Field ─────────────────────────────────────────────── */
+
+.particleField {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.particle {
+  position: absolute;
+  bottom: -10px;
+  border-radius: 50%;
+  animation: particle-drift linear infinite;
+  filter: blur(0.5px);
+  box-shadow: 0 0 6px currentColor;
+}
+
+/* ─── Background: Grid Overlay ───────────────────────────────────────────────── */
+
+.gridOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, transparent 75%);
+}
+
+/* ─── Scanline Effect ─────────────────────────────────────────────────────────── */
+
+.scanline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 120px;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 212, 255, 0.025) 50%,
+    transparent 100%
+  );
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+}
+
+/* ─── Main Content ───────────────────────────────────────────────────────────── */
+
+.content {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
+  padding: 48px 32px;
+  max-width: 640px;
+  width: 100%;
+
+  /* Entrance animation setup */
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.contentVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ─── Logo ───────────────────────────────────────────────────────────────────── */
+
+.logoWrapper {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 4s ease-in-out infinite;
+}
+
+.logoCore {
+  position: relative;
+  z-index: 3;
+  width: 72px;
+  height: 72px;
+  background: rgba(0, 212, 255, 0.06);
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+.logoRing {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  animation: rotate 8s linear infinite;
+}
+
+.logoRing::before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #00d4ff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #00d4ff, 0 0 16px #00d4ff;
+}
+
+.logoRingOuter {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  border: 1px solid rgba(123, 47, 255, 0.2);
+  animation: rotate 12s linear infinite reverse;
+}
+
+.logoRingOuter::before {
+  content: '';
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  background: #7b2fff;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #7b2fff, 0 0 16px #7b2fff;
+}
+
+/* ─── Heading Group ───────────────────────────────────────────────────────────── */
+
+.headingGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.25em;
+  color: var(--color-accent-primary);
+  text-transform: uppercase;
+}
+
+.eyebrowDot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-accent-primary);
+  box-shadow: 0 0 6px var(--color-accent-primary);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--color-text-primary);
+}
+
+.titleAccent {
+  background: var(--gradient-accent);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradient-shift 4s ease infinite;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.04em;
+}
+
+/* ─── Feature Pills ───────────────────────────────────────────────────────────── */
+
+.featurePills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.pill {
+  padding: 6px 16px;
+  background: rgba(0, 212, 255, 0.05);
+  border: 1px solid rgba(0, 212, 255, 0.18);
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: border-color var(--transition-base), color var(--transition-base),
+    background var(--transition-base);
+}
+
+.pill:hover {
+  border-color: rgba(0, 212, 255, 0.45);
+  color: var(--color-accent-primary);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+/* ─── CTA Button ─────────────────────────────────────────────────────────────── */
+
+.ctaButton {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 40px;
+  background: var(--gradient-button);
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  font-family: var(--font-primary);
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.04em;
+  box-shadow: var(--shadow-glow-button);
+  transition: box-shadow var(--transition-base), transform var(--transition-base),
+    background var(--transition-base);
+  overflow: hidden;
+}
+
+.ctaButton:hover {
+  background: var(--gradient-button-hover);
+  box-shadow: var(--shadow-glow-button-hover);
+  transform: translateY(-2px) scale(1.02);
+}
+
+.ctaButton:active {
+  transform: translateY(0) scale(0.99);
+  box-shadow: var(--shadow-glow-button);
+}
+
+.ctaButton:focus-visible {
+  outline: 2px solid var(--color-accent-primary);
+  outline-offset: 4px;
+}
+
+.ctaButtonGlow {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 60%);
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.ctaButtonText {
+  position: relative;
+  z-index: 1;
+}
+
+.ctaButtonArrow {
+  position: relative;
+  z-index: 1;
+  transition: transform var(--transition-base);
+}
+
+.ctaButton:hover .ctaButtonArrow {
+  transform: translateX(4px);
+}
+
+/* ─── Version Badge ───────────────────────────────────────────────────────────── */
+
+.versionBadge {
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ─── Corner Decorations ─────────────────────────────────────────────────────── */
+
+.cornerTL,
+.cornerBR {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.cornerTL {
+  top: 24px;
+  left: 24px;
+  border-top: 1px solid rgba(0, 212, 255, 0.4);
+  border-left: 1px solid rgba(0, 212, 255, 0.4);
+  border-radius: 4px 0 0 0;
+}
+
+.cornerBR {
+  bottom: 24px;
+  right: 24px;
+  border-bottom: 1px solid rgba(123, 47, 255, 0.4);
+  border-right: 1px solid rgba(123, 47, 255, 0.4);
+  border-radius: 0 0 4px 0;
+}

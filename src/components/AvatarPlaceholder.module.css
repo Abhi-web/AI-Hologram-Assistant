@@ -1,0 +1,169 @@
+/* ─── AvatarPlaceholder.module.css ─────────────────────────────────────────── */
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 160px;
+  height: 200px;
+  justify-content: center;
+}
+
+/* ── Ambient glow behind the orb ── */
+.ambientGlow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 212, 255, 0.18) 0%, rgba(123, 47, 255, 0.1) 50%, transparent 70%);
+  animation: pulse-glow 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* ── Orbit rings ── */
+.ringOuter,
+.ringMid,
+.ringInner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  transform: translate(-50%, -65%);
+}
+
+.ringOuter {
+  width: 130px;
+  height: 130px;
+  border-color: rgba(0, 212, 255, 0.2);
+  animation: rotate 10s linear infinite;
+}
+
+.ringMid {
+  width: 100px;
+  height: 100px;
+  border-color: rgba(123, 47, 255, 0.25);
+  animation: rotate 7s linear infinite reverse;
+}
+
+.ringInner {
+  width: 76px;
+  height: 76px;
+  border-color: rgba(255, 45, 135, 0.15);
+  animation: rotate 5s linear infinite;
+}
+
+/* Orbiting dot on outer ring */
+.ringOrbitDot,
+.ringOrbitDotMid {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.ringOrbitDot {
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #00d4ff;
+  box-shadow: 0 0 8px #00d4ff, 0 0 16px rgba(0, 212, 255, 0.5);
+}
+
+.ringOrbitDotMid {
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 5px;
+  height: 5px;
+  background: #7b2fff;
+  box-shadow: 0 0 8px #7b2fff, 0 0 14px rgba(123, 47, 255, 0.5);
+}
+
+/* ── Core orb ── */
+.core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -65%);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: float 4s ease-in-out infinite;
+}
+
+.coreInner {
+  position: relative;
+  z-index: 2;
+  width: 58px;
+  height: 58px;
+  background: radial-gradient(circle at 35% 35%, rgba(0, 212, 255, 0.2), rgba(123, 47, 255, 0.15));
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.corePulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(0, 212, 255, 0.3);
+  animation: pulse-ring 2.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.6; }
+  50%  { transform: scale(1.15); opacity: 0.2; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
+
+/* ── Label ── */
+.label {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+}
+
+.labelDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00d4ff;
+  box-shadow: 0 0 8px #00d4ff;
+  animation: pulse-glow 2s ease-in-out infinite;
+  margin-bottom: 2px;
+}
+
+.labelSub {
+  font-family: var(--font-primary);
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+}

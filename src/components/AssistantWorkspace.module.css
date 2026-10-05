@@ -1,0 +1,498 @@
+/* ─── AssistantWorkspace.module.css ─────────────────────────────────────────── */
+
+/* ── Root layout: sidebar + main panel ── */
+.workspace {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+  background: var(--gradient-bg);
+  position: relative;
+}
+
+/* ── Main panel (everything right of sidebar) ── */
+.mainPanel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 0;
+  position: relative;
+}
+
+/* ── Top Bar ── */
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 24px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.15);
+  background: rgba(5, 7, 20, 0.75);
+  backdrop-filter: blur(12px);
+  flex-shrink: 0;
+  height: 56px;
+  z-index: 20;
+}
+
+.topBarLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topBarRight {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.statusPill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-accent-primary);
+  letter-spacing: 0.04em;
+}
+
+.statusDot {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #00d4ff;
+  box-shadow: 0 0 6px rgba(0, 212, 255, 0.7);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* ── State Selector Bar in Top Header ── */
+.stateSelectorGroup {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 4px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.statePillBtn {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.statePillBtn:hover {
+  background: rgba(0, 212, 255, 0.12);
+  color: #00d4ff;
+  border-color: rgba(0, 212, 255, 0.3);
+}
+
+.statePillBtnActive {
+  background: rgba(0, 212, 255, 0.25);
+  color: #00f0ff;
+  border-color: #00d4ff;
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.35);
+}
+
+.toggleChatBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-radius: 8px;
+  color: #00d4ff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggleChatBtn:hover {
+  background: rgba(0, 212, 255, 0.22);
+  border-color: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.3);
+}
+
+/* ── Voice Mode Button in Top Bar ── */
+.voiceModeBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.voiceModeBtnContinuous {
+  background: rgba(0, 212, 255, 0.15);
+  border-color: rgba(0, 212, 255, 0.45);
+  color: #00f0ff;
+  box-shadow: 0 0 12px rgba(0, 212, 255, 0.25);
+}
+
+.voiceModeBtnWakeWord {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: rgba(168, 85, 247, 0.45);
+  color: #c084fc;
+  box-shadow: 0 0 12px rgba(168, 85, 247, 0.25);
+}
+
+.voiceModeBtnOff {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-muted);
+}
+
+.voiceModeDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+}
+
+.voiceModeDotContinuous {
+  background: #00f0ff;
+  box-shadow: 0 0 8px #00f0ff;
+  animation: pulse-glow 1.5s infinite;
+}
+
+.voiceModeDotWakeWord {
+  background: #c084fc;
+  box-shadow: 0 0 8px #c084fc;
+}
+
+/* ── Hologram Floating Voice Stage HUD ── */
+.voiceStageHud {
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 18px;
+  background: rgba(6, 10, 24, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 212, 255, 0.35);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 212, 255, 0.15);
+  z-index: 10;
+  max-width: 90%;
+  min-width: 260px;
+  animation: fadeIn 0.3s ease;
+  pointer-events: auto;
+}
+
+.voiceStageHudListening {
+  border-color: rgba(0, 212, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 212, 255, 0.3);
+}
+
+.voiceStageHudSpeaking {
+  border-color: rgba(16, 185, 129, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(16, 185, 129, 0.3);
+}
+
+.voiceStageHudProcessing {
+  border-color: rgba(168, 85, 247, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(168, 85, 247, 0.3);
+}
+
+.voiceStageHudInterrupted {
+  border-color: rgba(245, 158, 11, 0.5);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), 0 0 24px rgba(245, 158, 11, 0.3);
+}
+
+.voiceStageHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.voiceStagePulseDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.pulseDotCyan {
+  background: #00f0ff;
+  box-shadow: 0 0 8px #00f0ff;
+  animation: pulse-glow 1s infinite;
+}
+
+.pulseDotGreen {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: pulse-glow 0.8s infinite;
+}
+
+.pulseDotPurple {
+  background: #a855f7;
+  box-shadow: 0 0 8px #a855f7;
+  animation: pulse-glow 1.2s infinite;
+}
+
+.pulseDotAmber {
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+}
+
+.voiceStageTitle {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #00d4ff;
+  text-transform: uppercase;
+}
+
+.voiceStageStatusLabel {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+}
+
+.voiceStageSubtitle {
+  font-size: 12px;
+  font-style: italic;
+  color: #38bdf8;
+  max-width: 400px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.voiceStageActions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.stageActionBtn {
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.stageActionBtn:hover {
+  background: rgba(255, 255, 255, 0.16);
+  color: var(--color-text-primary);
+}
+
+.stageActionBtnDanger {
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 600;
+  background: rgba(239, 68, 68, 0.25);
+  border: 1px solid rgba(239, 68, 68, 0.6);
+  color: #fca5a5;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.stageActionBtnDanger:hover {
+  background: rgba(239, 68, 68, 0.4);
+}
+
+/* ── Content area: Houses the responsive companion layout ── */
+.contentArea {
+  position: relative;
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
+  width: 100%;
+}
+
+/* ── Companion Layout (Side-by-Side Two Section System) ── */
+.companionLayout {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Left / Main Companion Area: 3D ARIA Avatar Stage ── */
+.avatarSection {
+  flex: 1 1 60%;
+  min-width: 0;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: flex 0.4s cubic-bezier(0.16, 1, 0.3, 1), width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.companionLayoutChatClosed .avatarSection {
+  flex: 1 1 100%;
+  width: 100%;
+}
+
+/* Hologram ambient glow in avatar area */
+.avatarSection::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 580px;
+  height: 680px;
+  background: radial-gradient(ellipse, rgba(0, 212, 255, 0.15) 0%, rgba(123, 47, 255, 0.08) 50%, transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Subtle grid lines */
+.avatarGridLines {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse at center, rgba(0,0,0,0.6) 0%, transparent 75%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Right Companion Area: Live Conversation Panel ── */
+.chatSection {
+  flex: 0 0 clamp(360px, 40%, 520px);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 18px 18px 0;
+  overflow: hidden;
+  z-index: 10;
+  transform: translateX(0);
+  opacity: 1;
+  pointer-events: auto;
+  transition:
+    flex 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.35s ease,
+    padding 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.chatSectionClosed {
+  flex: 0 0 0px !important;
+  width: 0 !important;
+  min-width: 0 !important;
+  transform: translateX(100%);
+  opacity: 0;
+  pointer-events: none;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+/* Inner wrapper styling for chat panel */
+.chatSection > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  border: 1px solid rgba(0, 212, 255, 0.25);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 24px rgba(0, 212, 255, 0.12);
+  overflow: hidden;
+}
+
+.floatingShowChatBtn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 15;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 18px;
+  background: rgba(6, 10, 26, 0.85);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(0, 212, 255, 0.4);
+  border-radius: 9999px;
+  color: #00d4ff;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 16px rgba(0, 212, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.floatingShowChatBtn:hover {
+  transform: translateY(-2px);
+  background: rgba(0, 212, 255, 0.22);
+  border-color: #00f0ff;
+  box-shadow: 0 10px 30px rgba(0, 212, 255, 0.45);
+}
+
+/* Responsive adjustments for mid-sized and compact displays */
+@media (max-width: 960px) {
+  .avatarSection {
+    flex: 1 1 54%;
+  }
+  .chatSection {
+    flex: 0 0 clamp(320px, 46%, 440px);
+    padding: 10px 12px 14px 0;
+  }
+}
+
+@media (max-width: 720px) {
+  .companionLayout {
+    flex-direction: column;
+  }
+  .avatarSection {
+    flex: 1 1 50%;
+    min-height: 260px;
+  }
+  .chatSection {
+    flex: 1 1 50%;
+    padding: 8px 12px 12px 12px;
+  }
+  .chatSectionClosed {
+    flex: 0 0 0px !important;
+    height: 0 !important;
+  }
+}
