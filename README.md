@@ -16,8 +16,54 @@
   Featuring real-time 3D VRM humanoid avatars, procedural gaze & gestures, 15-viseme audio lip-syncing, hands-free continuous voice conversations with barge-in interruption, dynamic wardrobe customization, and dual local/cloud AI neural backends.
 </p>
 
-[Key Features](#-key-features) • [Architecture](#-system-architecture) • [Avatar & Animation](#-3d-avatar--animation-pipeline) • [Voice & Lip-Sync](#-voice-interaction--audio-pipeline) • [AI Providers](#-dual-ai-provider-architecture) • [Getting Started](#-getting-started) • [Documentation](#-project-structure)
+[Screenshots](#-visual-showcase--screenshots) • [Key Features](#-key-features) • [Architecture](#-system-architecture) • [Avatar & Animation](#-3d-avatar--animation-pipeline) • [Voice & Lip-Sync](#-voice-interaction--audio-pipeline) • [AI Providers](#-dual-ai-provider-architecture) • [Getting Started](#-getting-started) • [Documentation](#-project-structure)
 
+<br><br>
+<img src="assets/screenshots/aria-workspace.png" alt="ARIA 3D Holographic Companion Workspace" width="95%" style="border-radius: 12px; box-shadow: 0 10px 40px rgba(0, 243, 255, 0.25);" />
+<br>
+
+</div>
+
+---
+
+## 📸 Visual Showcase & Screenshots
+
+### 1. 🔮 Interactive 3D Holographic Workspace
+The main productivity hub combines a live Three.js 3D viewport featuring the ARIA humanoid VRM avatar, realtime cursor tracking, glowing holographic pedestal, emotion state badges, and an interactive conversation stream.
+
+<div align="center">
+  <img src="assets/screenshots/aria-workspace.png" alt="Main Workspace" width="90%" style="border-radius: 8px;" />
+  <p><em>Figure 1: Full-featured 3D companion workstation with active chat panel, audio visualizers, and live companion state indicators.</em></p>
+</div>
+
+<br>
+
+### 2. 🪟 Desktop Hologram Mode (Transparent HUD)
+A frameless, transparent Electron overlay that hovers freely over your Windows desktop and apps with cybernetic scanlines, always-on-top pinning, click-through pass-through, and a discrete mini-chat input bar.
+
+<div align="center">
+  <img src="assets/screenshots/aria-hologram-mode.png" alt="Desktop Hologram Overlay" width="65%" style="border-radius: 8px;" />
+  <p><em>Figure 2: Borderless desktop hologram overlay with transparent alpha background, floating HUD, and realtime speech interactions.</em></p>
+</div>
+
+<br>
+
+### 3. 👗 3D Wardrobe Customization & Texture Swapping
+Seamless real-time wardrobe changer supporting live diffuse texture swapping across body and clothing meshes (Cyberpunk Suit, Dark Gothic Velvet Dress, Dark Lace Ensemble) and custom GLB accessory overlays without reloading the 3D scene.
+
+<div align="center">
+  <img src="assets/screenshots/aria-wardrobe-modal.png" alt="Wardrobe Customization Modal" width="90%" style="border-radius: 8px;" />
+  <p><em>Figure 3: Interactive wardrobe customizer with outfit preview cards and drag-and-drop custom garment importer.</em></p>
+</div>
+
+<br>
+
+### 4. ⚙️ AI Neural Providers & Audio Engine Settings
+Comprehensive configuration center allowing dynamic switching between Local Offline AI (Ollama `llama3.2:3b`) and Cloud AI (OpenAI GPT-4o with DPAPI encryption), voice synthesis tuning, continuous dialogue toggles, and hologram window controls.
+
+<div align="center">
+  <img src="assets/screenshots/aria-settings-panel.png" alt="Settings Panel" width="90%" style="border-radius: 8px;" />
+  <p><em>Figure 4: AI provider management, connection latency testing, TTS voice selection, and speech recognition settings.</em></p>
 </div>
 
 ---
